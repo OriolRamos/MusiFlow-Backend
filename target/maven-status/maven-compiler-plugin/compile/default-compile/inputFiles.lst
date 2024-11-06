@@ -1,0 +1,8 @@
+/Users/nataliamasgrauvila/Documents/GitHub/Sense nom/MusiFlow-Backend/src/main/java/com/example/musiflowbackend/MusiFlowBackendApplication.java
+/Users/nataliamasgrauvila/Documents/GitHub/Sense nom/MusiFlow-Backend/src/main/java/com/example/musiflowbackend/config/CorsConfig.java
+/Users/nataliamasgrauvila/Documents/GitHub/Sense nom/MusiFlow-Backend/src/main/java/com/example/musiflowbackend/config/MongoConfig.java
+/Users/nataliamasgrauvila/Documents/GitHub/Sense nom/MusiFlow-Backend/src/main/java/com/example/musiflowbackend/controller/Mp3FileController.java
+/Users/nataliamasgrauvila/Documents/GitHub/Sense nom/MusiFlow-Backend/src/main/java/com/example/musiflowbackend/model/Mp3File.java
+/Users/nataliamasgrauvila/Documents/GitHub/Sense nom/MusiFlow-Backend/src/main/java/com/example/musiflowbackend/repository/Mp3FileRepository.java
+/Users/nataliamasgrauvila/Documents/GitHub/Sense nom/MusiFlow-Backend/src/main/java/com/example/musiflowbackend/service/DatabaseService.java
+/Users/nataliamasgrauvila/Documents/GitHub/Sense nom/MusiFlow-Backend/src/main/java/com/example/musiflowbackend/service/Mp3FileService.java

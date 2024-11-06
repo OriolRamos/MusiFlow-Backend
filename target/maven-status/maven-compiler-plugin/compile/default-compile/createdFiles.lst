@@ -1,0 +1,8 @@
+com/example/musiflowbackend/controller/Mp3FileController.class
+com/example/musiflowbackend/service/DatabaseService.class
+com/example/musiflowbackend/repository/Mp3FileRepository.class
+com/example/musiflowbackend/model/Mp3File.class
+com/example/musiflowbackend/MusiFlowBackendApplication.class
+com/example/musiflowbackend/config/MongoConfig.class
+com/example/musiflowbackend/config/CorsConfig.class
+com/example/musiflowbackend/service/Mp3FileService.class
