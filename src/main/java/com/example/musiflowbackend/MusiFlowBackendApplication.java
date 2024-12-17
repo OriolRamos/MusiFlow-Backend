@@ -2,10 +2,13 @@ package com.example.musiflowbackend;
 
 import com.example.musiflowbackend.model.Mp3File;
 import com.example.musiflowbackend.repository.Mp3FileRepository;
+import com.example.musiflowbackend.service.CloudfareService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 import java.util.List;
 
@@ -14,6 +17,9 @@ public class MusiFlowBackendApplication implements CommandLineRunner {
 
     @Autowired
     private Mp3FileRepository mp3FileRepository;
+
+    @Autowired
+    private CloudfareService cloudfareService;
 
     public static void main(String[] args) {
         SpringApplication.run(MusiFlowBackendApplication.class, args);
