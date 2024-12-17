@@ -6,5 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface Mp3FileRepository extends MongoRepository<Mp3File, String> {
+
+
 }
 
