@@ -9,7 +9,6 @@ import java.util.Optional;
 @Repository
 public interface userRepository extends MongoRepository<user, String> {
 
-
+    // Busca un usuari pel seu nom d'usuari
     Optional<user> findByUserName(String userName);
-
 }
