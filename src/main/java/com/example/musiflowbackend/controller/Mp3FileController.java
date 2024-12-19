@@ -48,7 +48,7 @@ public class Mp3FileController {
     // Endpoint to upload a new file
     @PostMapping("/upload")
     public ResponseEntity<Mp3File> uploadFile(@RequestParam("file") MultipartFile file,
-                                              @RequestParam(value = "title", required = false) String title,
+                                              @RequestParam(value = "title") String title,
                                               @RequestParam(value = "artist", required = false) String artist,
                                               @RequestParam(value = "album", required = false) String album,
                                               @RequestParam(value = "year", required = false) Integer year,
@@ -67,5 +67,12 @@ public class Mp3FileController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteFile(@PathVariable("id") String id, @PathVariable("user") String user) {
+        mp3FileService.deleteMp3File(id, user);
+        return ResponseEntity.ok().build();
+    }
+
 
 }

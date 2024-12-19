@@ -3,6 +3,7 @@ package com.example.musiflowbackend.service;
 import com.example.musiflowbackend.model.Mp3File;
 import com.example.musiflowbackend.model.user;
 import com.example.musiflowbackend.repository.Mp3FileRepository;
+import org.apache.catalina.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,5 +52,16 @@ public class Mp3FileService {
         return null;
     }
 
+    }
+
+    public void deleteMp3File(String id, String userName){
+        if (mp3FileRepository.existsById(id)) {
+            mp3FileRepository.deleteById(id);
+            user user = userRepository.findByUserName(userName).orElseThrow();
+            user.getSongs().removeIf(song -> song.getId().equals(id));
+            System.out.println("Deleted file with ID: " + id);
+        } else {
+            System.out.println("No file found with ID: " + id);
+        }
     }
 }

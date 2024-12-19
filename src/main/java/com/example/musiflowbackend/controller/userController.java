@@ -1,5 +1,6 @@
     package com.example.musiflowbackend.controller;
 
+    import com.example.musiflowbackend.model.Mp3File;
     import org.apache.catalina.User;
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.http.HttpStatus;
@@ -41,6 +42,12 @@
             } catch (IllegalArgumentException e){
                 return ResponseEntity.badRequest().body(null);
             }
+        }
+
+        @GetMapping("/{userName}/songs")
+        public ResponseEntity<List<Mp3File>> getAllSongs(@PathVariable String userName){
+            List<Mp3File> songs = userService.getAllSongs(userName);
+            return new ResponseEntity<>(songs, HttpStatus.OK);
         }
 
     }

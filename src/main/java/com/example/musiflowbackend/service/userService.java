@@ -1,5 +1,6 @@
 package com.example.musiflowbackend.service;
 
+import com.example.musiflowbackend.model.Mp3File;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +48,10 @@ public class userService {
 
     public List<user> getAllUsers() {
         return userRepository.findAll();  // Este método debe devolver la lista de usuarios desde la base de datos
+    }
+
+    public List<Mp3File> getAllSongs(String userName){
+        user user = userRepository.findByUserName(userName).orElseThrow();
+        return user.getSongs();
     }
 }
