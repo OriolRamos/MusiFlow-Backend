@@ -41,14 +41,14 @@ public class Mp3FileService {
         if (existingUser != null) {
 
             mp3FileRepository.save(mp3File);
-            /*
+
             log.info("Creant fitxer MP3 amb les següents dades:");
             log.info("Id: " + mp3File.getId());
             log.info("Títol: " + mp3File.getTitle());
             log.info("Artista: " + mp3File.getArtist());
             log.info("Àlbum: " + mp3File.getAlbum());
             log.info("Any: " + mp3File.getYear());
-            log.info("Gènere: " + mp3File.getGenre());*/
+            log.info("Gènere: " + mp3File.getGenre());
 
             existingUser.addSong(mp3File);
 
