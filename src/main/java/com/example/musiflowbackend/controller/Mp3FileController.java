@@ -76,15 +76,7 @@ public class Mp3FileController {
             // Buscar l'usuari en la base de dades
             Optional<user> optionalUser = userRepository.findById(user.getId());
             if (optionalUser.isPresent()) {
-                user existingUser = optionalUser.get();
 
-                // Afegir la cançó a la llista de cançons de l'usuari
-                existingUser.addSong(mp3File); // Utilitzem el mètode addSong() per afegir la cançó
-
-                // Actualitzar l'usuari en la base de dades
-                userRepository.save(existingUser);
-
-                // Retornar la resposta amb l'objecte Mp3File creat
                 return new ResponseEntity<>(mp3File, HttpStatus.CREATED);
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Usuari no trobat
@@ -94,36 +86,22 @@ public class Mp3FileController {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteFile(@PathVariable("id") String id) {
-        // Buscar el fitxer MP3 a la base de dades
-        Optional<Mp3File> mp3FileOptional = mp3FileRepository.findById(id);
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> deleteFile(@RequestParam("id") String id,
+                                             @RequestParam("user") String userJson) throws JsonProcessingException {
 
-        if (mp3FileOptional.isPresent()) {
-            Mp3File mp3File = mp3FileOptional.get();
+        // Convertir el JSON de l'usuari a un objecte user
+        ObjectMapper objectMapper = new ObjectMapper();
+        user user = objectMapper.readValue(userJson, user.class);
 
-            // Buscar l'usuari per ID
-            /*
-            Optional<user> optionalUser = userRepository.findById(userId);
-
-            if (optionalUser.isPresent()) {
-                user existingUser = optionalUser.get();
-
-                // Eliminar la cançó de la llista de cançons de l'usuari
-                existingUser.getSongs().removeIf(song -> song.getId().equals(id));
-
-                // Guardar l'usuari amb la llista actualitzada
-                userRepository.save(existingUser);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Usuari no trobat
-            }*/
-
-            // Eliminar el fitxer MP3 de la base de dades
-            mp3FileRepository.delete(mp3File);
-
-            return ResponseEntity.ok().build(); // Retornar resposta d'èxit
+        // Validar si l'usuari existeix a la base de dades
+        Optional<user> optionalUser = userRepository.findById(user.getId());
+        if (optionalUser.isPresent()) {
+            // Passar l'usuari al servei per eliminar el fitxer i actualitzar la llista
+            mp3FileService.deleteMp3File(id, optionalUser.get());
+            return ResponseEntity.ok("Fitxer eliminat correctament.");
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Fitxer no trobat
+            return new ResponseEntity<>("Usuari no trobat.", HttpStatus.NOT_FOUND);
         }
     }
 

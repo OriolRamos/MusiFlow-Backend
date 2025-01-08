@@ -39,9 +39,18 @@ public class Mp3FileService {
 
         user existingUser = userRepository.findById(user.getId()).orElse(null);
         if (existingUser != null) {
-            existingUser.addSong(mp3File);
 
             mp3FileRepository.save(mp3File);
+            /*
+            log.info("Creant fitxer MP3 amb les següents dades:");
+            log.info("Id: " + mp3File.getId());
+            log.info("Títol: " + mp3File.getTitle());
+            log.info("Artista: " + mp3File.getArtist());
+            log.info("Àlbum: " + mp3File.getAlbum());
+            log.info("Any: " + mp3File.getYear());
+            log.info("Gènere: " + mp3File.getGenre());*/
+
+            existingUser.addSong(mp3File);
 
             userRepository.save(existingUser);
 
@@ -54,14 +63,23 @@ public class Mp3FileService {
 
     }
 
-    public void deleteMp3File(String id, String userName){
-        if (mp3FileRepository.existsById(id)) {
-            mp3FileRepository.deleteById(id);
-            user user = userRepository.findByUserName(userName).orElseThrow();
+    public void deleteMp3File(String id, user user) {
+        // Buscar el fitxer a la base de dades
+        Optional<Mp3File> mp3FileOptional = mp3FileRepository.findById(id);
+
+        if (mp3FileOptional.isPresent()) {
+            Mp3File mp3File = mp3FileOptional.get();
+
+            // Eliminar el fitxer MP3 de la base de dades
+            mp3FileRepository.delete(mp3File);
+            log.info("Fitxer MP3 amb ID " + id + " eliminat de la base de dades.");
+
+            // Eliminar el fitxer de la llista de cançons de l'usuari
             user.getSongs().removeIf(song -> song.getId().equals(id));
-            System.out.println("Deleted file with ID: " + id);
+            userRepository.save(user); // Guardar l'usuari amb la llista actualitzada
+            log.info("Fitxer MP3 amb ID " + id + " eliminat de la llista de l'usuari.");
         } else {
-            System.out.println("No file found with ID: " + id);
+            log.error("No s'ha trobat el fitxer MP3 amb ID " + id);
         }
     }
 }
